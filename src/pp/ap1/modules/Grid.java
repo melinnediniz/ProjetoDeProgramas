@@ -3,10 +3,15 @@ package pp.ap1.modules;
 public class Grid implements IDrawable{
 	private Integer rows;
 	private Integer columns;
+	private String[][] board;
+	private Player player;
+	private Enemy enemy;
 	
-	public Grid(Integer rows, Integer columns) {
+	public Grid(Integer rows, Integer columns, Player player, Enemy enemy) {
 		this.rows = rows;
 		this.columns = columns;
+		this.player = player;
+		this.enemy = enemy;
 	}
 	
 	public Integer getColumns() {
@@ -25,18 +30,55 @@ public class Grid implements IDrawable{
 		this.rows = rows;
 	}
 
-	public void draw() {
+	public void setUpBoard()
+	{
 		Integer rows = getRows();
 		Integer columns = getColumns();
+		
+		this.board = new String[rows][columns];
+		
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < columns; j++) {
 				if(i == 0 || j == 0 || (j == columns - 1)  || i == rows - 1) {
-					System.out.print("=");					
+					this.board[i][j] = "░";
 				}else {
-					System.out.print(" ");
+					this.board[i][j] = " ";
 				}
+			}	
+		}
+				
+	}
+	
+	public void drawPlayer()
+	{
+		this.board[player.getPositionX()][player.getPositionY()] = "╬";
+		if(player.getPositionX() == enemy.getPositionX() && enemy.getPositionY() == player.getPositionY())
+		{
+			System.out.println("Player perde 1 vida! ");
+			player.setLife(1);
+			player.randomizePosition();
+
+		}
+		
+		this.board[enemy.getPositionX()][enemy.getPositionY()] = "0";
+	}
+	
+
+	public void draw() {
+		
+		Integer rows = getRows();
+		Integer columns = getColumns();
+		setUpBoard();
+		drawPlayer();
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < columns; j++) 
+			{
+				System.out.print(this.board[i][j]);
 			}	
 			System.out.println();
 		}
+		
 	}
 }
+
+
