@@ -7,14 +7,16 @@ import pp.ap1.modules.Player;
 
 public class Game {
 	private Grid grid;
-	private Player player = new Player();
-	private Enemy enemy = new Enemy();
+	private Integer rowSize = Configuration.GRID_ROW_SIZE;
+	private Integer columnSize = Configuration.GRID_COLUMN_SIZE;
+	private Player player = new Player(rowSize, columnSize);
+	private Enemy enemy = new Enemy(rowSize, columnSize);
 	private Integer shifts = 0;
 	
 	public Game() {
 		this.grid = new Grid(
-				Configuration.GRID_ROW_SIZE, 
-				Configuration.GRID_COLUMN_SIZE,
+				rowSize, 
+				columnSize,
 				player, 
 				enemy
 		);
@@ -30,23 +32,19 @@ public class Game {
 	
 	private void input() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("> Type the command (/begin, /up, /down, /left, /right): ");
+		System.out.println("> Type the command (/up, /down, /left, /right): ");
 		String command = scanner.nextLine();
 		switch(CommandsEnum.from(command)) {
 			case UP:
-				System.out.println("Turning up!\n");
 				player.moveUp(1);
 				break;
 			case DOWN:
-				System.out.println("Turning down!\n");
 				player.moveDown(1);
 				break;
 			case LEFT:
-				System.out.println("Turning left!\n");
 				player.moveLeft(1);
 				break;
 			case RIGHT:
-				System.out.println("Turning right!\n");
 				player.moveRight(1);
 				break;
 			case FIRE:

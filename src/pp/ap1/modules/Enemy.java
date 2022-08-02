@@ -1,18 +1,18 @@
 package pp.ap1.modules;
 
-import pp.ap1.Configuration;
-
 public class Enemy {
 	
 	private Integer life;
 	private Integer[] position = new Integer[2];
-	private Integer rows = Configuration.GRID_ROW_SIZE -1;
-	private Integer columns = Configuration.GRID_COLUMN_SIZE -1;
+	private Integer rows; 
+	private Integer columns;
 	
-	public Enemy()
+	public Enemy(Integer rows, Integer columns)
 	{
-		this.position[0] = 1 + (int) (Math.random() * rows);
-		this.position[1] = 1 + (int) (Math.random() * columns);
+		this.rows = rows - 2;
+		this.columns = columns - 2;
+		this.position[0] = 1 + (int) (Math.random() * this.rows);
+		this.position[1] = 1 + (int) (Math.random() * this.columns);
 	}
 	
 	public Integer getLife() {
@@ -32,8 +32,8 @@ public class Enemy {
 	
 	public void randomizePosition()
 	{
-		this.position[0] = 1 + (int) (Math.random() * rows);
-		this.position[1] = 1 + (int) (Math.random() * columns);
+		this.position[0] = 1 + (int) (Math.random() * this.rows);
+		this.position[1] = 1 + (int) (Math.random() * this.columns);
 	}
 
 }

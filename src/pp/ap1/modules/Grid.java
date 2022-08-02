@@ -42,7 +42,7 @@ public class Grid implements IDrawable{
 				if(i == 0 || j == 0 || (j == columns - 1)  || i == rows - 1) {
 					this.board[i][j] = "░";
 				}else {
-					this.board[i][j] = " ";
+					this.board[i][j] = "0";
 				}
 			}	
 		}
@@ -51,7 +51,7 @@ public class Grid implements IDrawable{
 	
 	public void drawPlayer()
 	{
-		this.board[player.getPositionX()][player.getPositionY()] = "╬";
+		this.board[player.getPositionY()][player.getPositionX()] = "╬";
 		if(player.getPositionX() == enemy.getPositionX() && enemy.getPositionY() == player.getPositionY())
 		{
 			System.out.println("Player perde 1 vida! ");
@@ -60,7 +60,7 @@ public class Grid implements IDrawable{
 
 		}
 		
-		this.board[enemy.getPositionX()][enemy.getPositionY()] = "0";
+		this.board[enemy.getPositionX()][enemy.getPositionY()] = "#";
 	}
 	
 
