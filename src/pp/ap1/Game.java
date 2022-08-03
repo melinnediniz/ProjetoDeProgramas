@@ -3,27 +3,52 @@ import java.util.Scanner;
 
 import pp.ap1.modules.Enemy;
 import pp.ap1.modules.Grid;
+import pp.ap1.modules.HUD;
 import pp.ap1.modules.Player;
 
 public class Game {
+	private final Integer rowSize = Configuration.GRID_ROW_SIZE;
+	private final Integer columnSize = Configuration.GRID_COLUMN_SIZE;
 	private Grid grid;
-	private Integer rowSize = Configuration.GRID_ROW_SIZE;
-	private Integer columnSize = Configuration.GRID_COLUMN_SIZE;
-	private Player player = new Player(rowSize, columnSize);
-	private Enemy enemy = new Enemy(rowSize, columnSize);
-	private Integer shifts = 0;
+	private Player player; 
+	private Enemy enemy;
+	private HUD hud;
+	private Integer shifts;
 	
 	public Game() {
-		this.grid = new Grid(
-				rowSize, 
-				columnSize,
-				player, 
-				enemy
-		);
+		this.grid = new Grid(rowSize, columnSize);
+		this.player = new Player(rowSize, columnSize, Configuration.PLAYER_MAX_LIFE);
+		this.enemy = new Enemy(rowSize, columnSize);
+		this.hud = new HUD(columnSize);
+		this.shifts = 0;
 	}
 	
 	public Grid getGrid() {
 		return grid;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public Enemy getEnemy() {
+		return enemy;
+	}
+	
+	public HUD getHud() {
+		return hud;
+	}
+	
+	public void setHud(HUD hud) {
+		this.hud = hud;
+	}
+	
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
+	public void setEnemy(Enemy enemy) {
+		this.enemy = enemy;
 	}
 	
 	public void setGrid(Grid grid) {
@@ -62,14 +87,22 @@ public class Game {
 			enemy.randomizePosition();
 		}
 		
+		if(player.getLife() == 0) {
+			System.out.println("Game over man, game over!");
+			return;
+		}
+		
 		this.run();
 	}
 	
 	private void draw() {
 		Grid currentGrid = getGrid();
-		currentGrid.draw();
-		System.out.println(player);
-	
+		Player currentPlayer = getPlayer();
+		Enemy currentEnemy = getEnemy();
+		HUD hud = getHud();
+		currentEnemy.applyCollisionWith(currentPlayer);
+		currentPlayer.applyCollisionWith(currentEnemy);
+		currentGrid.draw(currentPlayer, currentEnemy, hud);
 	}
 	public void run() {
 		this.draw();
