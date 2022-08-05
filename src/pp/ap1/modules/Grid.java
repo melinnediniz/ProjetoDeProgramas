@@ -1,17 +1,14 @@
 package pp.ap1.modules;
 
-public class Grid implements IDrawable{
+public class Grid{
 	private Integer rows;
 	private Integer columns;
 	private String[][] board;
-	private Player player;
-	private Enemy enemy;
 	
-	public Grid(Integer rows, Integer columns, Player player, Enemy enemy) {
+	public Grid(Integer rows, Integer columns) {
 		this.rows = rows;
 		this.columns = columns;
-		this.player = player;
-		this.enemy = enemy;
+		this.board = new String[rows][columns];
 	}
 	
 	public Integer getColumns() {
@@ -29,17 +26,23 @@ public class Grid implements IDrawable{
 	public void setRows(Integer rows) {
 		this.rows = rows;
 	}
+	
+	public String[][] getBoard() {
+		return board;
+	}
+	
+	public void setBoard(String[][] board) {
+		this.board = board;
+	}
 
-	public void setUpBoard()
+	public void setupBoard()
 	{
 		Integer rows = getRows();
 		Integer columns = getColumns();
-		
-		this.board = new String[rows][columns];
-		
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < columns; j++) {
-				if(i == 0 || j == 0 || (j == columns - 1)  || i == rows - 1) {
+				Boolean isBoudary = (i == 0) || (j == 0) || (j == columns - 1) || (i == rows - 1);
+				if(isBoudary) {
 					this.board[i][j] = "░";
 				}else {
 					this.board[i][j] = "0";
@@ -49,29 +52,15 @@ public class Grid implements IDrawable{
 				
 	}
 	
-	public void drawPlayer()
-	{
-		this.board[player.getPositionY()][player.getPositionX()] = "╬";
-		if(player.getPositionX() == enemy.getPositionX() && enemy.getPositionY() == player.getPositionY())
-		{
-			System.out.println("Player perde 1 vida! ");
-			player.setLife(1);
-			player.randomizePosition();
-
-		}
+	public void draw(Player player, Enemy enemy, HUD hud) {
+		setupBoard();
 		
-		this.board[enemy.getPositionX()][enemy.getPositionY()] = "#";
-	}
-	
-
-	public void draw() {
+		hud.draw(player);
+		player.draw(this);
+		enemy.draw(this);
 		
-		Integer rows = getRows();
-		Integer columns = getColumns();
-		setUpBoard();
-		drawPlayer();
-		for(int i = 0; i < rows; i++) {
-			for(int j = 0; j < columns; j++) 
+		for(int i = 0; i < getRows(); i++) {
+			for(int j = 0; j < getColumns(); j++) 
 			{
 				System.out.print(this.board[i][j]);
 			}	
