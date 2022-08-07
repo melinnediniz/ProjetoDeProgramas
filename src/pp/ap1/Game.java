@@ -39,6 +39,14 @@ public class Game {
 		return hud;
 	}
 	
+	public Integer getShifts() {
+		return shifts;
+	}
+	
+	public void setShifts(Integer shifts) {
+		this.shifts = shifts;
+	}
+	
 	public void setHud(HUD hud) {
 		this.hud = hud;
 	}
@@ -53,6 +61,10 @@ public class Game {
 	
 	public void setGrid(Grid grid) {
 		this.grid = grid;
+	}
+	
+	private void resetShifts() {
+		setShifts(0);
 	}
 	
 	private void input() {
@@ -79,19 +91,16 @@ public class Game {
 				System.out.println("Type a valid command!");
 				break;
 		}
-		
-		shifts++;
-		if(shifts > 3)
-		{
+		setShifts(getShifts() + 1);
+		if(getShifts() > 3){
 			System.out.println("The enemy moved!");
 			enemy.randomizePosition();
+			resetShifts();
 		}
-		
 		if(player.getLife() == 0) {
 			System.out.println("Game over man, game over!");
 			return;
 		}
-		
 		this.run();
 	}
 	
