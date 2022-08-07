@@ -90,8 +90,6 @@ public class Player{
 	public void randomizePosition(){
 		this.positionX = 1 + (int) (Math.random() * rows);
 		this.positionY = 1 + (int) (Math.random() * columns);
-		this.positionX = 5;
-		this.positionY = 5;
 	}
 
 	public void decrementLife() {
