@@ -1,7 +1,7 @@
 package pp.ap1.modules.ui;
 
 public class GameStartingCounter {
-	public void draw() throws InterruptedException {
+	private void draw() throws InterruptedException {
 		System.out.println("Get ready?");
 		Thread.sleep(1000);
 		System.out.println("3");

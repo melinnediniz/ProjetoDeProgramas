@@ -39,7 +39,7 @@ public class Player{
 	}
 	
 	public void setLife(Integer life) {
-		this.life -= life;
+		this.life = life;
 	}
 	
 	public void setPositionY(Integer positionY) {
@@ -70,8 +70,7 @@ public class Player{
 		this.positionX += yValue;
 	}
 	
-	public void moveLeft(Integer xValue)
-	{
+	public void moveLeft(Integer xValue){
 		if(positionY < 2)
 		{
 			return;
@@ -80,8 +79,7 @@ public class Player{
 		this.positionY -= xValue;
 	}
 	
-	public void moveRight(Integer xValue)
-	{
+	public void moveRight(Integer xValue){
 		if(positionY > this.columns){
 			return;
 		}
@@ -89,16 +87,15 @@ public class Player{
 		this.positionY += xValue;
 	}
 	
-	public void randomizePosition()
-	{
+	public void randomizePosition(){
 		this.positionX = 1 + (int) (Math.random() * rows);
 		this.positionY = 1 + (int) (Math.random() * columns);
+		this.positionX = 5;
+		this.positionY = 5;
 	}
 
 	public void decrementLife() {
-		if(getLife() - 1 >= 0 && getLife() - 1 <= getMaxLife()) {
-			setLife(life - 1);
-		}
+		setLife(life - 1);
 	}
 	
 	public void applyCollisionWith(Enemy enemy) {

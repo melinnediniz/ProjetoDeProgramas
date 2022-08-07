@@ -42,6 +42,8 @@ public class Enemy {
 	public void randomizePosition() {
 		this.positionX = 1 + (int) (Math.random() * this.rows);
 		this.positionY = 1 + (int) (Math.random() * this.columns);
+		this.positionX = 5;
+		this.positionY = 5;
 	}
 	
 	public void applyCollisionWith(Player player) {

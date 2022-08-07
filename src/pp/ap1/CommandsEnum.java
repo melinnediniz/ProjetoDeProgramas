@@ -1,11 +1,11 @@
 package pp.ap1;
 
 public enum CommandsEnum {
-	UP("/up"), 
-	DOWN("/down"), 
-	LEFT("/left"), 
-	RIGHT("/right"),
-	FIRE("/fire"),
+	UP("w"), 
+	DOWN("s"), 
+	LEFT("a"), 
+	RIGHT("d"),
+	FIRE("f"),
 	UNKNOWN("unknown");
 	
 	private String command;
@@ -19,11 +19,11 @@ public enum CommandsEnum {
 	}
 	
 	public static CommandsEnum from(String command) {
-		if(command.equals("/up")) return CommandsEnum.UP;
-		if(command.equals("/down")) return CommandsEnum.DOWN;
-		if(command.equals("/left")) return CommandsEnum.LEFT;
-		if(command.equals("/right")) return CommandsEnum.RIGHT;
-		if(command.equals("/fire")) return CommandsEnum.FIRE;
+		if(command.equals("w")) return CommandsEnum.UP;
+		if(command.equals("s")) return CommandsEnum.DOWN;
+		if(command.equals("a")) return CommandsEnum.LEFT;
+		if(command.equals("d")) return CommandsEnum.RIGHT;
+		if(command.equals("f")) return CommandsEnum.FIRE;
 		return CommandsEnum.UNKNOWN;
 	}
 }	

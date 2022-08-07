@@ -2,6 +2,8 @@ package pp.ap1.modules.ui;
 
 import java.util.Scanner;
 
+import pp.ap1.modules.ui.utils.TextAnimator;
+
 public class AboutScreen implements IScreen {
 
 	private String title;
@@ -31,10 +33,7 @@ public class AboutScreen implements IScreen {
 				+ "\n"
 				+ "Projeto de Programas.\n";	
 		System.out.println("=================================================");
-		for(int index = 0; index < message.length(); index++) {
-			System.out.print(message.charAt(index));
-			Thread.sleep(10);
-		}
+		TextAnimator.run(message, 10);
 		System.out.println();
 	}
 	

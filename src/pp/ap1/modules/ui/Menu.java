@@ -24,7 +24,7 @@ public class Menu{
 		return getScreens().size();
 	}
 	
-	public void input() {
+	private void input() {
 		int totalSizeScreens = getTotalSizeScreens();
 		System.out.println("> Type the command[0.." + (totalSizeScreens + 1) + "]: ");
 		Scanner scanner = new Scanner(System.in);
@@ -42,8 +42,8 @@ public class Menu{
 		this.run();
 	}
 	
-	public void draw() {
-		System.out.println("================== WELCOME TO ADVENTURE WARS ================== \n");
+	private void draw() {
+		System.out.println("================== WELCOME TO ADVENTURE WARS ==================");
 		System.out.println("| 0. New game");
 		int totalSizeScreens = getTotalSizeScreens();
 		for(int index = 0; index < totalSizeScreens; index++) {
