@@ -5,6 +5,7 @@ import pp.ap1.modules.Enemy;
 import pp.ap1.modules.Grid;
 import pp.ap1.modules.HUD;
 import pp.ap1.modules.Player;
+import pp.ap1.modules.ui.GameOverScreen;
 
 public class Game {
 	private final Integer rowSize = Configuration.GRID_ROW_SIZE;
@@ -39,6 +40,14 @@ public class Game {
 		return hud;
 	}
 	
+	public Integer getShifts() {
+		return shifts;
+	}
+	
+	public void setShifts(Integer shifts) {
+		this.shifts = shifts;
+	}
+	
 	public void setHud(HUD hud) {
 		this.hud = hud;
 	}
@@ -55,9 +64,13 @@ public class Game {
 		this.grid = grid;
 	}
 	
+	private void resetShifts() {
+		setShifts(0);
+	}
+	
 	private void input() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("> Type the command (/up, /down, /left, /right): ");
+		System.out.println("> Type the command (w (up), a (left), s (down), d (right), f (fire): ");
 		String command = scanner.nextLine();
 		switch(CommandsEnum.from(command)) {
 			case UP:
@@ -79,19 +92,12 @@ public class Game {
 				System.out.println("Type a valid command!");
 				break;
 		}
-		
-		shifts++;
-		if(shifts > 3)
-		{
+		setShifts(getShifts() + 1);
+		if(getShifts() > 3){
 			System.out.println("The enemy moved!");
 			enemy.randomizePosition();
+			resetShifts();
 		}
-		
-		if(player.getLife() == 0) {
-			System.out.println("Game over man, game over!");
-			return;
-		}
-		
 		this.run();
 	}
 	
@@ -106,6 +112,10 @@ public class Game {
 	}
 	public void run() {
 		this.draw();
+		if(getPlayer().getLife() == 0) {
+			new GameOverScreen().run();
+			return;
+		}
 		this.input();
 	}
 }

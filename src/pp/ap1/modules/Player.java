@@ -39,7 +39,7 @@ public class Player{
 	}
 	
 	public void setLife(Integer life) {
-		this.life -= life;
+		this.life = life;
 	}
 	
 	public void setPositionY(Integer positionY) {
@@ -51,70 +51,63 @@ public class Player{
 	}
 	
 	public void moveUp(Integer yValue) {
-		if(this.positionY < 2)
+		if(this.positionX < 2)
 		{
 			return;
 		}
 		System.out.println("Turning up!\n");
-		this.positionY -= yValue;
+		this.positionX -= yValue;
 	}
 	
 	
 	public void moveDown(Integer yValue)
 	{
-		if(this.positionY > this.rows)
+		if(this.positionX > this.rows)
 		{
 			return;
 		}
 		System.out.println("Turning down!\n");
-		this.positionY += yValue;
+		this.positionX += yValue;
 	}
 	
-	public void moveLeft(Integer xValue)
-	{
-		if(positionX < 2)
+	public void moveLeft(Integer xValue){
+		if(positionY < 2)
 		{
 			return;
 		}
 		System.out.println("Turning left!\n");
-		this.positionX -= xValue;
+		this.positionY -= xValue;
 	}
 	
-	public void moveRight(Integer xValue)
-	{
-		if(positionX > this.columns){
+	public void moveRight(Integer xValue){
+		if(positionY > this.columns){
 			return;
 		}
 		System.out.println("Turning right!\n");
-		this.positionX += xValue;
+		this.positionY += xValue;
 	}
 	
-	public void randomizePosition()
-	{
+	public void randomizePosition(){
 		this.positionX = 1 + (int) (Math.random() * rows);
 		this.positionY = 1 + (int) (Math.random() * columns);
 	}
 
 	public void decrementLife() {
-		if(getLife() - 1 >= 0 && getLife() - 1 <= getMaxLife()) {
-			setLife(life - 1);
-		}
+		setLife(life - 1);
 	}
 	
 	public void applyCollisionWith(Enemy enemy) {
 		Boolean xIsColliding = enemy.getPositionX() == this.getPositionX();
 		Boolean yIsColliding = enemy.getPositionY() == this.getPositionY();
-		System.out.println(xIsColliding);
-		System.out.println(yIsColliding);
 		if(xIsColliding && yIsColliding) {
 			System.out.println("Player got hit!");
 			decrementLife();
-		}
+		}	
 	}
 	
 	public void draw(Grid grid) {
 		String[][] board = grid.getBoard().clone();
-		board[this.getPositionX()][this.getPositionY()] = "╬";
+		board[this.getPositionX()][this.getPositionY()] = "♥";
 		grid.setBoard(board);
 	}	
 }
