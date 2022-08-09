@@ -26,7 +26,6 @@ public class AboutScreen implements IScreen {
 		String message = "		CRÉDITOS"
 				+ "\n"
 				+ "\n"
-				+ "\n\n"
 				+ "Jogo Criado por: Gabriel Lima e Melinne Diniz"
 				+ "\n"
 				+ "Jogo desenvolvido para estudo e aplicação dos conhecimentos aprendidos na matéria de "

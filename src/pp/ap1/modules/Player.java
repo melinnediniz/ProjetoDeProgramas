@@ -100,6 +100,7 @@ public class Player{
 		Boolean xIsColliding = enemy.getPositionX() == this.getPositionX();
 		Boolean yIsColliding = enemy.getPositionY() == this.getPositionY();
 		if(xIsColliding && yIsColliding) {
+			enemy.randomizePosition();
 			System.out.println("Player got hit!");
 			decrementLife();
 		}	

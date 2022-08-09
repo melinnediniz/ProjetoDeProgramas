@@ -43,32 +43,26 @@ public class Enemy {
 	public void decrementEnergy()
 	{
 		setEnergy(getEnergy() - 1);
+		this.randomizePosition();
 	}
 	
-	public void energyStatus()
-	{
-		if(getEnergy() <= 0)
-		{
-			System.out.println("Inimigo morto");
-		}
-	}
 	
 	public void randomizePosition() {
 		this.positionX = 1 + (int) (Math.random() * this.rows);
 		this.positionY = 1 + (int) (Math.random() * this.columns);
 	}
 	
-	public void applyCollisionWith(Player player, Missil missil) {
-		Boolean xIsColliding = (this.getPositionX() == player.getPositionX()) || (this.getPositionX() == missil.getPositionX());
-		Boolean yIsColliding = this.getPositionY() == player.getPositionY()   ||(this.getPositionX() == missil.getPositionX());
+	/*public void applyCollisionWith(Missil missil) {
+		Boolean xIsColliding = (this.getPositionX() == missil.getPositionX());
+		Boolean yIsColliding = (this.getPositionX() == missil.getPositionX());
 		if(xIsColliding && yIsColliding) {
 			this.randomizePosition();
 		}
-	}
+	}*/
 
 	public void draw(Grid grid) {
 		String[][] board = grid.getBoard().clone();
-		board[this.getPositionX()][this.getPositionY()] = "|⬚|"; //☸
+		board[this.getPositionX()][this.getPositionY()] = "⬚|"; //☸
 		grid.setBoard(board);
 	}
 	

@@ -83,7 +83,7 @@ public class Game {
 	
 	private void input() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("> Type the command (w (up)►, a (left)◄, s (down)▼, d (right)◄, f (fire): ");
+		System.out.println("> Type the command (w (up)►, a (left)◄, s (down)▼, d (right)◄, f (fire) or exit (0): ");
 		String command = scanner.nextLine();
 		switch(CommandsEnum.from(command)) {
 			case UP:
@@ -114,13 +114,15 @@ public class Game {
 			case FIRERIGHT:
 				missil.FireRight();
 				break;
+			case EXIT:
+				System.exit(0);
 			default:
 				System.out.println("Type a valid command!");
 				break;
 		}
 
 		setShifts(getShifts() + 1);
-		if(getShifts() > 6){
+		if(getShifts() > 3){
 			System.out.println("The enemy moved!");
 			enemy.randomizePosition();
 			resetShifts();
@@ -137,7 +139,7 @@ public class Game {
 		Enemy currentEnemy = getEnemy();
 		HUD hud = getHud();
 		currentMissil.applyCollisionWith(currentEnemy);
-		currentEnemy.applyCollisionWith(currentPlayer, currentMissil);
+		//currentEnemy.applyCollisionWith(currentMissil);
 		currentPlayer.applyCollisionWith(currentEnemy);
 		currentGrid.draw(currentPlayer, currentEnemy, currentMissil, hud);
 	}

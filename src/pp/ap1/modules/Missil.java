@@ -136,6 +136,7 @@ public class Missil {
 		Boolean hasPassedY = yIsColliding && (getPositionX() - 1 == enemy.getPositionX() || getPositionX() + 1 == enemy.getPositionX());
 		if(isFired) {
 			if((xIsColliding && yIsColliding) || (hasPassedX || hasPassedY)) {
+				enemy.randomizePosition();
 				enemy.setEnergy(enemy.getEnergy() - 10);
 				resetMove();
 				setFireCount(0);

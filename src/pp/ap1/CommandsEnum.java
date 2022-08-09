@@ -2,6 +2,7 @@ package pp.ap1;
 
 public enum CommandsEnum {
 
+	EXIT("0"),
 	UP("w"), 
 	DOWN("s"), 
 	LEFT("a"), 
@@ -31,6 +32,7 @@ public enum CommandsEnum {
 		if(command.equals("fs")) return CommandsEnum.FIREDOWN;
 		if(command.equals("fa")) return CommandsEnum.FIRELEFT;
 		if(command.equals("fd")) return CommandsEnum.FIRERIGHT;
+		if(command.equals("0")) return CommandsEnum.EXIT;
 		return CommandsEnum.UNKNOWN;
 	}
 }	
