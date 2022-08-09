@@ -2,6 +2,7 @@ package pp.ap1;
 
 import pp.ap1.modules.ui.AboutScreen;
 import pp.ap1.modules.ui.GameStartingCounter;
+import pp.ap1.modules.ui.HelpScreen;
 import pp.ap1.modules.ui.Menu;
 import pp.ap1.modules.ui.Startup;
 

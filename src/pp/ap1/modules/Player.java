@@ -107,7 +107,7 @@ public class Player{
 	
 	public void draw(Grid grid) {
 		String[][] board = grid.getBoard().clone();
-		board[this.getPositionX()][this.getPositionY()] = "♥";
+		board[this.getPositionX()][this.getPositionY()] = "☸";
 		grid.setBoard(board);
 	}	
 }

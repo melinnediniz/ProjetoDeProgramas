@@ -41,11 +41,11 @@ public class Grid{
 		Integer columns = getColumns();
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < columns; j++) {
-				Boolean isBoudary = (i == 0) || (j == 0) || (j == columns - 1) || (i == rows - 1);
+				Boolean isBoudary = (i == 0) || (j == 0) || (j == columns-1) || (i == rows-1);
 				if(isBoudary) {
-					this.board[i][j] = "░";
+					this.board[i][j] = "■■";
 				}else {
-					this.board[i][j] = "~";
+					this.board[i][j] = "_|";
 				}
 			}	
 		}

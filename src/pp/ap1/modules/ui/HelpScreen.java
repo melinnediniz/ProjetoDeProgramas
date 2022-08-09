@@ -4,16 +4,16 @@ import java.util.Scanner;
 
 import pp.ap1.modules.ui.utils.TextAnimator;
 
-public class AboutScreen implements IScreen {
+public class HelpScreen implements IScreen {
 
 	private String title;
 	
-	public AboutScreen(String title) {
+	public HelpScreen(String title) {
 		this.title = title;
 	}
 	
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 	
 	private void input() {
@@ -21,19 +21,33 @@ public class AboutScreen implements IScreen {
 		Scanner scanner = new Scanner(System.in);
 		scanner.nextLine();
 	}
+		
 	
 	private void draw() throws InterruptedException {
-		String message = "		CRÉDITOS"
+		String message = "EM ADVENTURE WARS O SEU OBJETIVO É PERSEGUIR E DESTRUIR OS BARCOS INIMIGOS"
 				+ "\n"
-				+ "\n"
+				+"           ___"
+				+"     |     | |"
+				+"    // \\   | |"
+				+"   |--o|===|-|"
+				+"   |---|   |P|"
+				+"  /     \\ |L|"
+				+" |       | |A|"
+				+" | U     |=|Y|"
+				+" | E     | |E|"
+				+" | A     | |R|"
+				+" |_______| |_|"
+				+"  |@| |@|  | |"
+				+"___________|_|_"
+				+ "Inimigo: O inimigo (enemy) é representado por {} e se move de forma aleatória a cada 4 movimentos do jogador"
 				+ "\n\n"
-				+ "Jogo Criado por: Gabriel Lima e Melinne Diniz"
+				+ "Jogador(Você): O player é representado por {} e pode se mover¹ e atirar² no inimigo. "
 				+ "\n"
 				+ "Jogo desenvolvido para estudo e aplicação dos conhecimentos aprendidos na matéria de "
 				+ "\n"
 				+ "Projeto de Programas.\n";	
 		System.out.println("=================================================");
-		TextAnimator.run(message, 10);
+		TextAnimator.run(message, 1);
 		System.out.println();
 	}
 	

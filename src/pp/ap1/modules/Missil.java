@@ -8,6 +8,7 @@ public class Missil {
 	private Boolean isFired;
 	private Player player;
 	private Integer fireCount = 0;
+	private Integer shotDistance = 2;
 	
 	public Missil(Integer rows, Integer columns,Player player)
 	{
@@ -19,6 +20,14 @@ public class Missil {
 
 	}
 	
+	public Integer getShotDistance() {
+		return shotDistance;
+	}
+
+	public void setShotDistance(Integer shotDistance) {
+		this.shotDistance = shotDistance;
+	}
+
 	public Boolean getIsFired()
 	{
 		return this.isFired;
@@ -64,38 +73,53 @@ public class Missil {
 		
 	}
 	
-	public void Fire(String option)
+	public void FireUp()
 	{
-		if(getFireCount() > 0 || getPositionX() < 2 || getPositionY() < 2 ||
-			getPositionX() > this.rows || getPositionY() > this.columns)
+		if(getFireCount() > 0 || getPositionX()- getShotDistance() < 1 )
 		{
 			return;
 		}
-	
 		setIsFired(true);
-		
-		switch(option)
-		{
-		case "up":
-			setPositionX(getPositionX() - 2);
-			System.out.println("Firing up!");
-			break;
-		case "down":
-			setPositionX(getPositionX() + 2);
-			System.out.println("Firing down!");
-			break;
-		case "left":
-			setPositionY(getPositionY() - 2);
-			System.out.println("Firing left!");
-			break;
-		case "right":
-			setPositionY(getPositionY() + 2);
-			System.out.println("Firing right!");
-			break;				
-		}
-		
+		setPositionX(getPositionX() - getShotDistance());
+		System.out.println("Firing up!");
 		setFireCount(getFireCount() + 1);
+	}
+	
+	public void FireDown()
+	{
+		if(getFireCount() > 0 || getPositionY() - getShotDistance()  < 2 )
+		{
+			return;
 		}
+		setIsFired(true);
+		setPositionX(getPositionX() + getShotDistance());
+		System.out.println("Firing down!");
+		setFireCount(getFireCount() + 1);
+	}
+	
+	public void FireLeft()
+	{
+		if(getFireCount() > 0 || getPositionX() + getShotDistance()  > this.rows )
+		{
+			return;
+		}
+		setIsFired(true);
+		setPositionY(getPositionY() - getShotDistance());
+		System.out.println("Firing left!");
+		setFireCount(getFireCount() + 1);
+	}
+	
+	public void FireRight()
+	{
+		if(getFireCount() > 0 || getPositionY() + getShotDistance() > this.columns) {
+			return;
+		}
+		setIsFired(true);
+		setPositionY(getPositionY() + getShotDistance());
+		System.out.println("Firing right!");
+		setFireCount(getFireCount() + 1);
+	}
+	
 		
 
 	
@@ -123,8 +147,7 @@ public class Missil {
 
 	public void draw(Grid grid) {
 		String[][] board = grid.getBoard().clone();
-		board[this.getPositionX()][this.getPositionY()] = "●"; //☸
+		board[this.getPositionX()][this.getPositionY()] = "●|"; //☸
 		grid.setBoard(board);
-		System.out.println(getFireCount());
 	}
 }

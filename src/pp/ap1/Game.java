@@ -83,7 +83,7 @@ public class Game {
 	
 	private void input() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("> Type the command (w (up), a (left), s (down), d (right), f (fire): ");
+		System.out.println("> Type the command (w (up)►, a (left)◄, s (down)▼, d (right)◄, f (fire): ");
 		String command = scanner.nextLine();
 		switch(CommandsEnum.from(command)) {
 			case UP:
@@ -103,16 +103,16 @@ public class Game {
 				missil.resetMove();
 				break;
 			case FIREUP:
-				missil.Fire("up");
+				missil.FireUp();
 				break;
 			case FIREDOWN:
-				missil.Fire("down");
+				missil.FireDown();
 				break;
 			case FIRELEFT:
-				missil.Fire("left");
+				missil.FireLeft();
 				break;
 			case FIRERIGHT:
-				missil.Fire("right");
+				missil.FireRight();
 				break;
 			default:
 				System.out.println("Type a valid command!");

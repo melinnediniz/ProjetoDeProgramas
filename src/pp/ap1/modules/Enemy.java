@@ -54,8 +54,8 @@ public class Enemy {
 	}
 	
 	public void randomizePosition() {
-		this.positionX = 5;//1 + (int) (Math.random() * this.rows);
-		this.positionY = 8;//1 + (int) (Math.random() * this.columns);
+		this.positionX = 1 + (int) (Math.random() * this.rows);
+		this.positionY = 1 + (int) (Math.random() * this.columns);
 	}
 	
 	public void applyCollisionWith(Player player, Missil missil) {
@@ -68,7 +68,7 @@ public class Enemy {
 
 	public void draw(Grid grid) {
 		String[][] board = grid.getBoard().clone();
-		board[this.getPositionX()][this.getPositionY()] = "♠";
+		board[this.getPositionX()][this.getPositionY()] = "|⬚|"; //☸
 		grid.setBoard(board);
 	}
 	

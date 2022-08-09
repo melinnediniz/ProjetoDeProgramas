@@ -16,17 +16,17 @@ public class HUD {
 	}
 	
 	public void draw(Player player, Enemy enemy) {
-		String lifeStatus = "░ LIFE: " + player.getLife() + "/" + player.getMaxLife();
-		String enemyStatus = "ENEMY: " + enemy.getEnergy() + "%";
+		String lifeStatus = "■ YOU: " + player.getLife() + "/" + player.getMaxLife();
+		String enemyStatus = "■ PIRATES: " + enemy.getEnergy() + "%";
 		for(int j = 0; j < getColumns(); j++) {
-			System.out.print("░");			
+			System.out.print("■■");			
 		}
 		
 		Integer statusLength = getColumns() - lifeStatus.length();
 		System.out.print("\n" + lifeStatus + "\n" + enemyStatus);
 		for(int j = 0; j < statusLength; j++) {
 			if(j == statusLength - 1) {
-				System.out.print("░");
+				System.out.print("■■");
 			}else {
 				System.out.print(" ");				
 			}
