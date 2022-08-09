@@ -2,21 +2,22 @@ package pp.ap1.modules;
 
 public class Enemy {
 	
-	private Integer life;
+	private Integer energy;
 	private Integer positionX;
 	private Integer positionY;
 	private Integer rows; 
 	private Integer columns;
 	
-	public Enemy(Integer rows, Integer columns)
+	public Enemy(Integer rows, Integer columns, Integer energy)
 	{
 		this.rows = rows - 2;
 		this.columns = columns - 2;
 		this.randomizePosition();
+		this.energy = energy;
 	}
 	
-	public Integer getLife() {
-		return life;
+	public Integer getEnergy() {
+		return energy;
 	}
 	
 	public Integer getPositionX() {
@@ -27,8 +28,8 @@ public class Enemy {
 		return positionY;
 	}
 	
-	public void setLife(Integer life) {
-		this.life = life;
+	public void setEnergy(Integer energy) {
+		this.energy = energy;
 	}
 	
 	public void setPositionX(Integer positionX) {
@@ -39,14 +40,27 @@ public class Enemy {
 		this.positionY = positionY;
 	}
 	
-	public void randomizePosition() {
-		this.positionX = 1 + (int) (Math.random() * this.rows);
-		this.positionY = 1 + (int) (Math.random() * this.columns);
+	public void decrementEnergy()
+	{
+		setEnergy(getEnergy() - 1);
 	}
 	
-	public void applyCollisionWith(Player player) {
-		Boolean xIsColliding = this.getPositionX() == player.getPositionX();
-		Boolean yIsColliding = this.getPositionY() == player.getPositionY();
+	public void energyStatus()
+	{
+		if(getEnergy() <= 0)
+		{
+			System.out.println("Inimigo morto");
+		}
+	}
+	
+	public void randomizePosition() {
+		this.positionX = 5;//1 + (int) (Math.random() * this.rows);
+		this.positionY = 8;//1 + (int) (Math.random() * this.columns);
+	}
+	
+	public void applyCollisionWith(Player player, Missil missil) {
+		Boolean xIsColliding = (this.getPositionX() == player.getPositionX()) || (this.getPositionX() == missil.getPositionX());
+		Boolean yIsColliding = this.getPositionY() == player.getPositionY()   ||(this.getPositionX() == missil.getPositionX());
 		if(xIsColliding && yIsColliding) {
 			this.randomizePosition();
 		}

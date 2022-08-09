@@ -45,17 +45,18 @@ public class Grid{
 				if(isBoudary) {
 					this.board[i][j] = "░";
 				}else {
-					this.board[i][j] = "0";
+					this.board[i][j] = "~";
 				}
 			}	
 		}
 				
 	}
 	
-	public void draw(Player player, Enemy enemy, HUD hud) {
+	public void draw(Player player, Enemy enemy, Missil missil, HUD hud) {
 		setupBoard();
 		
-		hud.draw(player);
+		hud.draw(player, enemy);
+		missil.draw(this);
 		player.draw(this);
 		enemy.draw(this);
 		

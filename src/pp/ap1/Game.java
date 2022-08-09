@@ -4,14 +4,18 @@ import java.util.Scanner;
 import pp.ap1.modules.Enemy;
 import pp.ap1.modules.Grid;
 import pp.ap1.modules.HUD;
+import pp.ap1.modules.Missil;
 import pp.ap1.modules.Player;
 import pp.ap1.modules.ui.GameOverScreen;
+import pp.ap1.modules.ui.VictoryScreen;
 
 public class Game {
 	private final Integer rowSize = Configuration.GRID_ROW_SIZE;
 	private final Integer columnSize = Configuration.GRID_COLUMN_SIZE;
 	private Grid grid;
 	private Player player; 
+	private Missil missil;
+
 	private Enemy enemy;
 	private HUD hud;
 	private Integer shifts;
@@ -19,9 +23,18 @@ public class Game {
 	public Game() {
 		this.grid = new Grid(rowSize, columnSize);
 		this.player = new Player(rowSize, columnSize, Configuration.PLAYER_MAX_LIFE);
-		this.enemy = new Enemy(rowSize, columnSize);
+		this.enemy = new Enemy(rowSize, columnSize, Configuration.ENEMY_MAX_LIFE);
+		this.missil = new Missil(rowSize, columnSize, this.player);
 		this.hud = new HUD(columnSize);
 		this.shifts = 0;
+	}
+	
+	public Missil getMissil() {
+		return missil;
+	}
+
+	public void setMissil(Missil missil) {
+		this.missil = missil;
 	}
 	
 	public Grid getGrid() {
@@ -75,46 +88,69 @@ public class Game {
 		switch(CommandsEnum.from(command)) {
 			case UP:
 				player.moveUp(1);
+				missil.resetMove();
 				break;
 			case DOWN:
 				player.moveDown(1);
+				missil.resetMove();
 				break;
 			case LEFT:
 				player.moveLeft(1);
+				missil.resetMove();
 				break;
 			case RIGHT:
 				player.moveRight(1);
+				missil.resetMove();
 				break;
-			case FIRE:
-				System.out.println("Firing!");
+			case FIREUP:
+				missil.Fire("up");
+				break;
+			case FIREDOWN:
+				missil.Fire("down");
+				break;
+			case FIRELEFT:
+				missil.Fire("left");
+				break;
+			case FIRERIGHT:
+				missil.Fire("right");
 				break;
 			default:
 				System.out.println("Type a valid command!");
 				break;
 		}
+
 		setShifts(getShifts() + 1);
-		if(getShifts() > 3){
+		if(getShifts() > 6){
 			System.out.println("The enemy moved!");
 			enemy.randomizePosition();
 			resetShifts();
+			missil.setFireCount(0);
 		}
 		this.run();
 	}
 	
 	private void draw() {
 		Grid currentGrid = getGrid();
+		Missil currentMissil = getMissil();
 		Player currentPlayer = getPlayer();
+		currentMissil.keepPosition();
 		Enemy currentEnemy = getEnemy();
 		HUD hud = getHud();
-		currentEnemy.applyCollisionWith(currentPlayer);
+		currentMissil.applyCollisionWith(currentEnemy);
+		currentEnemy.applyCollisionWith(currentPlayer, currentMissil);
 		currentPlayer.applyCollisionWith(currentEnemy);
-		currentGrid.draw(currentPlayer, currentEnemy, hud);
+		currentGrid.draw(currentPlayer, currentEnemy, currentMissil, hud);
 	}
 	public void run() {
 		this.draw();
 		if(getPlayer().getLife() == 0) {
 			new GameOverScreen().run();
 			return;
+		}
+		
+		if(getEnemy().getEnergy() <= 0)
+		{
+			new VictoryScreen().run();
 		}
 		this.input();
 	}
