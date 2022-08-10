@@ -23,10 +23,9 @@ public class AboutScreen implements IScreen {
 	}
 	
 	private void draw() throws InterruptedException {
-		String message = "Em AdventureWars, o seu objetivo é destruir todas as vidas da nave inimiga."
+		String message = "		CRÉDITOS"
 				+ "\n"
-				+ "Para isso, o jogador poderá atirar misséis durante cada rodada para tentar atigir o inimigo."
-				+ "\n\n"
+				+ "\n"
 				+ "Jogo Criado por: Gabriel Lima e Melinne Diniz"
 				+ "\n"
 				+ "Jogo desenvolvido para estudo e aplicação dos conhecimentos aprendidos na matéria de "

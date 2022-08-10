@@ -100,6 +100,7 @@ public class Player{
 		Boolean xIsColliding = enemy.getPositionX() == this.getPositionX();
 		Boolean yIsColliding = enemy.getPositionY() == this.getPositionY();
 		if(xIsColliding && yIsColliding) {
+			enemy.randomizePosition();
 			System.out.println("Player got hit!");
 			decrementLife();
 		}	
@@ -107,7 +108,7 @@ public class Player{
 	
 	public void draw(Grid grid) {
 		String[][] board = grid.getBoard().clone();
-		board[this.getPositionX()][this.getPositionY()] = "♥";
+		board[this.getPositionX()][this.getPositionY()] = "☸";
 		grid.setBoard(board);
 	}	
 }
