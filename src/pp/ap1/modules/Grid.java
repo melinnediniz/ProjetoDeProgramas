@@ -54,7 +54,7 @@ public class Grid{
 	
 	public void draw(Player player, Enemy enemy, Missil missil, HUD hud) {
 		setupBoard();
-		
+
 		hud.draw(player, enemy);
 		missil.draw(this);
 		player.draw(this);

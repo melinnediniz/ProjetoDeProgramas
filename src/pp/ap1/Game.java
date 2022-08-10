@@ -10,8 +10,8 @@ import pp.ap1.modules.ui.GameOverScreen;
 import pp.ap1.modules.ui.VictoryScreen;
 
 public class Game {
-	private final Integer rowSize = Configuration.GRID_ROW_SIZE;
-	private final Integer columnSize = Configuration.GRID_COLUMN_SIZE;
+	private Integer rowSize;
+	private Integer columnSize;
 	private Grid grid;
 	private Player player; 
 	private Missil missil;
@@ -20,7 +20,9 @@ public class Game {
 	private HUD hud;
 	private Integer shifts;
 	
-	public Game() {
+	public Game(Configuration config) {
+		this.rowSize = config.getGridRowSize();
+		this.columnSize = config.getGridColumnSize();
 		this.grid = new Grid(rowSize, columnSize);
 		this.player = new Player(rowSize, columnSize, Configuration.PLAYER_MAX_LIFE);
 		this.enemy = new Enemy(rowSize, columnSize, Configuration.ENEMY_MAX_LIFE);
@@ -139,7 +141,6 @@ public class Game {
 		Enemy currentEnemy = getEnemy();
 		HUD hud = getHud();
 		currentMissil.applyCollisionWith(currentEnemy);
-		//currentEnemy.applyCollisionWith(currentMissil);
 		currentPlayer.applyCollisionWith(currentEnemy);
 		currentGrid.draw(currentPlayer, currentEnemy, currentMissil, hud);
 	}

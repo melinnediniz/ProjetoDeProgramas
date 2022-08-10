@@ -20,6 +20,30 @@ public class Missil {
 
 	}
 	
+	public Integer getRows() {
+		return rows;
+	}
+
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
+
+	public Integer getColumns() {
+		return columns;
+	}
+
+	public void setColumns(Integer columns) {
+		this.columns = columns;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	public Integer getShotDistance() {
 		return shotDistance;
 	}
@@ -75,7 +99,7 @@ public class Missil {
 	
 	public void FireUp()
 	{
-		if(getFireCount() > 0 || getPositionX()- getShotDistance() < 1 )
+		if(getFireCount() > 0 || (getPositionX() - getShotDistance()) < 2 )
 		{
 			return;
 		}
@@ -87,7 +111,7 @@ public class Missil {
 	
 	public void FireDown()
 	{
-		if(getFireCount() > 0 || getPositionY() - getShotDistance()  < 2 )
+		if(getFireCount() > 0 || getPositionX() + getShotDistance()  > getColumns())
 		{
 			return;
 		}
@@ -99,7 +123,7 @@ public class Missil {
 	
 	public void FireLeft()
 	{
-		if(getFireCount() > 0 || getPositionX() + getShotDistance()  > this.rows )
+		if(getFireCount() > 0 || getPositionY() - getShotDistance()  < 2 )
 		{
 			return;
 		}
@@ -111,7 +135,7 @@ public class Missil {
 	
 	public void FireRight()
 	{
-		if(getFireCount() > 0 || getPositionY() + getShotDistance() > this.columns) {
+		if(getFireCount() > 0 || getPositionY() + getShotDistance() > getColumns()) {
 			return;
 		}
 		setIsFired(true);
@@ -120,18 +144,13 @@ public class Missil {
 		setFireCount(getFireCount() + 1);
 	}
 	
-		
-
-	
 	public void resetMove() {
 		setIsFired(false);
 	}
 	
-	
 	public void applyCollisionWith(Enemy enemy) {
 		Boolean xIsColliding = this.getPositionX() == enemy.getPositionX();
 		Boolean yIsColliding = (this.getPositionY() == enemy.getPositionY());
-		//Revisar
 		Boolean hasPassedX = xIsColliding && (getPositionY() - 1 == enemy.getPositionY() || getPositionY() + 1 == enemy.getPositionY());
 		Boolean hasPassedY = yIsColliding && (getPositionX() - 1 == enemy.getPositionX() || getPositionX() + 1 == enemy.getPositionX());
 		if(isFired) {

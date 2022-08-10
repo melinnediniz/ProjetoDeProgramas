@@ -9,12 +9,15 @@ import pp.ap1.modules.ui.Startup;
 
 public class ProjetoDeProgramasMain {
 	public static void main(String[] args) throws InterruptedException {
+		Configuration configuration = new Configuration();
 		new Startup().run();
-		Menu menu = new Menu();
-		menu.addScreen(new AboutScreen("About")).addScreen(new HelpScreen("Help")).addScreen(new ConfigScreen("Settings")).run();
-		
+		new Menu()
+			.addScreen(new AboutScreen("About"))
+			.addScreen(new HelpScreen("Help"))
+			.addScreen(new ConfigScreen("Settings", configuration))
+		.run();
 		new GameStartingCounter().run();
-		new Game().run();
+		new Game(configuration).run();
 	}
 
 
